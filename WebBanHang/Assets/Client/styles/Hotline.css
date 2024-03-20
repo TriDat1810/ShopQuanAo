@@ -1,0 +1,47 @@
+﻿.hotline-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hotline-icon {
+    background-color: #f00;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+.hotline-text {
+    color: #f00;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hotline-icon:hover .hotline-text {
+    opacity: 1;
+}
+
+.hotline-phone {
+    font-size: 18px; 
+    font-weight: bold;
+}

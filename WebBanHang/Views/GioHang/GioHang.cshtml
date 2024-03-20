@@ -1,0 +1,218 @@
+﻿@using WebBanHang.Models
+@model List<GioHangViewModels>
+@{
+    ViewBag.Title = "Thông tin giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .breadcrumbs {
+        width: 100%;
+        height: 60px;
+        border-bottom: solid 1px #ebebeb;
+        margin-bottom: 58px;
+    }
+
+        .breadcrumbs ul li {
+            display: inline-block;
+            margin-right: 17px;
+        }
+
+            .breadcrumbs ul li.active a {
+                color: #b9b4c7;
+            }
+
+            .breadcrumbs ul li i {
+                margin-right: 17px;
+            }
+
+            .breadcrumbs ul li a {
+                color: #51545f;
+            }
+</style>
+<div class="new_arrivals" style="margin-top: 175px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- Breadcrumbs -->
+
+                <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom:10px;">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ hàng</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Thông tin giỏ hàng</h2>
+                </div>
+            </div>
+        </div>
+        @{
+            var sum = 0;
+            <div class="table-responsive" style="margin-top: 50px;">
+                @if (Model.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                                <th style="width:100px">Đơn giá</th>
+                                <th>Số lượng</th>
+                                <td>Size</td>
+                                <th>Tổng tiền</th>
+                                <th colspan="2">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                var i = 1;
+                                foreach (var item in Model)
+                                {
+
+                                    if (@item.GiaKhuyenMai > 0)
+                                    {
+                                        var s = (int)@item.GiaKhuyenMai * @item.SoLuong;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td><img width="100" src="/@item.AnhBia" /></td>
+                                            <td> @item.TenSP</td>
+                                            @using (Html.BeginForm("CapnhatGiohang", "Giohang", new { @MaSP = item.MaSP }))
+                                            {
+                                                <td>@String.Format("{0:0,0}", @item.GiaKhuyenMai) </td>
+                                                <td>
+                                                    <input type="number" min="1" name="txtSoluong" value="@item.SoLuong" style="background-color: white" />
+                                                </td>
+                                                <td>@item.TenS</td>
+
+                                                <td>@String.Format("{0:0,0}", s) </td>
+                                                <td> <a href="@Url.Action("Details", "ShopQuanAo", new { id = item.MaSP })"> Chi tiết </a></td>
+                                                <td> @Html.ActionLink("Xóa", "XoaGiohang", new { @MaSP = item.MaSP })</td>
+
+                                                <td> <input type="submit" value="Cập Nhật" /></td>
+                                            }
+                                        </tr>
+                                        sum += @s;
+                                    }
+                                    else
+                                    {
+
+                                        <tr>
+                                            <td>@i</td>
+                                            <td><img width="100" src="/@item.AnhBia" /></td>
+                                            <td> @item.TenSP</td>
+                                            @using (Html.BeginForm("CapnhatGiohang", "Giohang", new { @MaSP = item.MaSP }))
+                                            {
+                                                <td>@String.Format("{0:0,0}", item.DonGia) </td>
+                                                <td>
+                                                    <input type="number" min="1" name="txtSoluong" value="@item.SoLuong" style="background-color:yellow" />
+                                                </td>
+                                                <td>@item.TenS</td>
+                                                <td>@String.Format("{0:0,0}", item.ThanhTien) </td>
+                                                <td> <a href="@Url.Action("Details", "ShopQuanAo", new { id = item.MaSP })"> Chi tiết </a></td>
+                                                <td> @Html.ActionLink("Xóa", "XoaGiohang", new { @MaSP = item.MaSP })</td>
+                                                <td> <input type="submit" value="Cập Nhật" /></td>
+                                            }
+                                        </tr>
+
+                                        sum += (int)@item.ThanhTien;
+                                    }
+                                    i++;
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3"></th>
+                                <td colspan="4"> Số lượng sản phẩm: @ViewBag.Tongsoluong </td>
+                                <td colspan="5" style="color:red"> Tổng tiền: @String.Format("{0:0,0}", @sum) VNĐ </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+                }
+            </div>
+            <div class="box-footer">
+                <div class="pull-right">
+                    <a href="/GioHang/XoaTatcaGiohang" style="background: #7b7b7b; color: #fff;" class="btn">Hủy đơn hàng </a>
+                    @if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+                    {
+
+                        <a href="/NguoiDung/DangNhap" style="background: #428bca; color: #fff;" class="btn">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+                        <a href="/ThanhToanOnline/PayOnl" style="background: #428bca; color: #fff;" class="btn">Thanh toán online <i class="fa fa-chevron-right"></i></a>
+                    }
+                    else
+                    {
+
+                        <a href="/GioHang/DatHang" style="background: #428bca; color: #fff;" class="btn">Thanh toán khi nhận hàng <i class="fa fa-chevron-right"></i></a>
+                        <a href="/ThanhToanOnline/PayOnl" style="background: #428bca; color: #fff;" class="btn">Thanh toán online <i class="fa fa-chevron-right"></i></a>
+
+                    }
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<!-- Newsletter -->
+
+<div class="newsletter">
+    <div class="container" style="background: #fdc6a0">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+                    <h4>Newsletter</h4>
+                    <p>Đăng ký nhận ngay giảm giá 20% cho lần mua hàng đầu tiên của bạn</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form action="post">
+                    <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                        <input id="newsletter_email" type="email" placeholder="Email của bạn" required="required" data-error="Valid email is required.">
+                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Gửi Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                    <ul class="footer_nav">
+                        <li><a href="contact.html">Hướng dẫn mua hàng</a></li>
+                        <li><a href="contact.html">Hướng dẫn thanh toán</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-skype" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-pinterest" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

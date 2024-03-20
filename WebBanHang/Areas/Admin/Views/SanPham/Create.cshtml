@@ -1,0 +1,143 @@
+﻿@model WebBanHang.Areas.Admin.Models.ThemSanPhamViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section jsfooter1
+{
+    <script>
+        $('select.listbox').attr('data-rel', 'chosen');
+    </script>
+
+}
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="/Admin/Index">Trang chủ</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    <li>
+        Thêm sản phẩm
+    </li>
+</ul>
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon white edit"></i><span class="break"></span>Thêm sản phẩm</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            @using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-horizontal">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Tên sản phẩm</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.TenSP, new { @class = "span6 typeahead" })
+                                @Html.ValidationMessageFor(model => model.TenSP)
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Giá sản phẩm</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.GiaBan, new { @class = "span6 typeahead" })
+                                @Html.ValidationMessageFor(model => model.GiaBan)
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Giá khuyến mại</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.GiaKhuyenMai, new { @class = "span6 typeahead" })
+                                @Html.ValidationMessageFor(model => model.GiaKhuyenMai)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="selectError3">Loại sản phẩm</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.MaL, null)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="selectError3">Bộ sưu tập</label>
+                            <div class="controls">
+                                @Html.DropDownListFor(model => model.MaBST, null)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="selectError3">Kích Thước</label>
+                            <div class="controls">
+                                @Html.ListBoxFor(m => m.SelectedSizes, new MultiSelectList(Model.Sizes, "MaS", "TenS"), new { @class = "listbox" })
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Số lượng</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.SoLuong, new { @class = "span6 typeahead" })
+                                @Html.ValidationMessageFor(model => model.SoLuong)
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Giới tính</label>
+                            <div class="controls">
+                                <select id="sGioiTinh" name="GioiTinh">
+                                    <option value="0">Nữ</option>
+                                    <option value="1">Nam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Ảnh bìa</label>
+                            <div class="controls">
+                                <input type="file" name="fileUpload" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Ảnh phụ</label>
+                            <div class="controls">
+                                @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <p style="color:red">@ViewData["hinhanh"]</p>
+                                @ViewBag.UploadStatus
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Ngày nhập hàng</label>
+                            <div class="controls">
+                                <input type="date" name="ngayNhapHang" />
+                                @Html.ValidationMessageFor(model => model.ngayNhapHang, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="control-group">
+                            <label class="control-label" for="typeahead">Thông tin</label>
+                            <div class="controls">
+                                @Html.TextAreaFor(model => model.ThongTin, new { @class = "span6 typeahead", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.ThongTin)
+                            </div>
+                            <p style="color:red;padding-left: 180px;">@ViewBag.ThongBao</p>
+                        </div>
+                        <div class="form-actions">
+                            <a style="background-color:#702222; text-decoration: none; color: #fff" class="btn" href="@Url.Action("Index", "SanPham")">Back to list</a>
+                            <button type="submit" class="btn btn-primary" name="btnSubmit">Submit</button>
+                            <button type="reset" class="btn">Reset</button>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+
+        </div>
+    </div><!--/span-->
+</div><!--/row-->

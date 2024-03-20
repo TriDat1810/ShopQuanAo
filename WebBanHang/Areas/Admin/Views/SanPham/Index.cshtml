@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebBanHang.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="/Admin/Home">Trang chủ</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    <li>
+        Sản phẩm
+    </li>
+</ul>
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2>Danh sách sản phẩm</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+        </div>
+
+        <div class="box-content">
+
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá bán</th>
+                        <th>Ngày cập nhật</th>
+                        <th>Danh mục</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="a_@item.MaSP">
+                            <td><img src="~/@item.AnhBia" width="150px" /></td>
+                            <td style="text-align: center; padding-top: 70px;">@Html.DisplayFor(modelItem => item.TenSP)</td>
+                            @if (item.GiaKhuyenMai > 0)
+                            {
+                                <td style="text-align: center; padding-top: 70px;">@item.GiaKhuyenMai</td>
+                            }
+                            else
+                            {
+                                <td style="text-align: center; padding-top: 70px;">@item.GiaBan</td>
+                            }
+
+                            <td style="text-align: center; padding-top: 70px;">@Html.DisplayFor(modelItem => item.ngayNhapHang)</td>
+                            <td style="text-align: center; padding-top: 70px;">@Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoai)</td>
+                            <td style="text-align: center; padding-top: 60px;">
+                                <a class="btn" href="/Admin/SanPham/Details/@item.MaSP"><i class="halflings-icon white edit"></i>Detail</a>
+                                <a class="btn btn-info" href="~/Admin/SanPham/Edit/@item.MaSP"><i class="halflings-icon white edit"></i> Sửa</a>
+                                <a class="btn btn-danger" data-ajax="true" data-ajax-complete="$('#a_@item.MaSP').remove()" data-ajax-confirm="Bạn có muốn xóa bản ghi này không?" data-ajax-method="Delete" href="/Admin/SanPham/Delete/@item.MaSP">
+                                    <i class="halflings-icon white trash"></i> Xóa
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <a class="btn btn-success" href="@Url.Action("Create","SanPham")">
+                <i class="halflings-icon white zoom-in"></i>Thêm mới
+            </a>
+        </div>
+    </div><!--/span-->
+</div><!--/row-->

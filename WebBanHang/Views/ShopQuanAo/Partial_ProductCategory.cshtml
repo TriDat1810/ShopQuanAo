@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebBanHang.Models.LoaiSanPham>
+@if (Model != null && Model.Any())
+{
+    <ul class="sidebar_categories">
+        <li><a href="@Url.Action("Partial_Product", "ShopQuanAo")">All</a></li>
+        @foreach (var item in Model)
+        {
+            if (ViewBag.CateId == item.MaL)
+            {
+                <li class="active"><a href="@Url.Action("SPTheoLoai", "ShopQuanAo", new { id = item.MaL})"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>@item.TenLoai</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("SPTheoLoai", "ShopQuanAo", new { id = item.MaL})">@item.TenLoai</a></li>
+            }
+
+        }
+    </ul>
+}

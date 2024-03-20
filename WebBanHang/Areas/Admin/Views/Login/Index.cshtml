@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/Content/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link href="~/Assets/Admin/css/main.css" rel="stylesheet" />
+    <link href="~/Assets/Admin/css/util.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                <div class="login100-form validate-form">
+                    <span class="login100-form-title p-b-33">
+                        Quản Trị Viên
+                    </span>
+                    <div class="login100-form validate-form">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.ValidationSummary(true)
+                            <div class="wrap-input100 validate-input" data-validate="Phải nhập tên đăng nhập">
+                                <input class="input100" type="text" name="TenDangNhap" placeholder="Tên đăng nhập">
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Phải nhập mật khẩu">
+                                <input class="input100" type="password" name="Matkhau" placeholder="Mật khẩu">
+                                <span class="focus-input100-1"></span>
+                                <span class="focus-input100-2"></span>
+                            </div>
+                            <p style="color:red; text-align:center">@ViewBag.Thongbao</p>
+                            <div class="container-login100-form-btn m-t-20">
+                                <button class="login100-form-btn">
+                                    ĐĂNG NHẬP
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--===============================================================================================-->
+    <script src="~/Content/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/bootstrap/js/popper.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Assets/Admin/js/main.js"></script>
+
+</body>
+</html>

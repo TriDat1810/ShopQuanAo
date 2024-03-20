@@ -1,0 +1,275 @@
+﻿@model WebBanHang.Models.DetailedViewModels
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assets/Client/styles/single_styles.css" rel="stylesheet" />
+<link href="~/Assets/Client/styles/single_responsive.css" rel="stylesheet" />
+@if (Model != null)
+{
+    <div class="container single_product_container">
+        <div class="row">
+            <div class="col">
+                <!-- Breadcrumbs -->
+                <div class="breadcrumbs d-flex flex-row align-items-center">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="@Url.Action("Partial_Product","ShopQuanAo")"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản phẩm</a></li>
+                        <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>@Model.SanPham.TenSP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                @if (Model.HinhAnh != null && Model.HinhAnh.Any())
+                {
+                    <div class="single_product_pics">
+                        <div class="row">
+                            @foreach (var item in Model.HinhAnh)
+                            {
+                                <div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+                                    <div class="single_product_thumbnails">
+                                        <ul>
+                                            <li class="active"><img src="/@item.TenHinhAnh" alt="/@item.TenHinhAnh" data-image="/@item.TenHinhAnh"></li>
+                                            <li><img src="/@item.TenHinhAnh" alt="/@item.TenHinhAnh" data-image="/@item.TenHinhAnh"></li>
+                                            <li><img src="/@item.TenHinhAnh" alt="/@item.TenHinhAnh" data-image="/@item.TenHinhAnh"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 image_col order-lg-2 order-1">
+                                    <div class="single_product_image">
+                                        <img class="single_product_image_background" src="/@item.TenHinhAnh" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-5">
+                <div class="product_details">
+                    <div class="product_details_title">
+                        <h2>@Model.SanPham.TenSP</h2>
+                        <p>@Model.SanPham.ThongTin</p>
+                    </div>
+                    <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
+                        <i class="fa-solid fa-truck"></i><span style="margin-left:10px;">free delivery</span>
+                    </div>
+                    @if (Model.SanPham.GiaKhuyenMai > 0)
+                    {
+                        <div class="original_price">@WebBanHang.Common.Common.FormatNumber(Model.SanPham.GiaBan, 0)</div>
+                        <div class="product_price">@WebBanHang.Common.Common.FormatNumber(Model.SanPham.GiaKhuyenMai, 0)</div>
+                    }
+                    else
+                    {
+                        <div class="product_price">@WebBanHang.Common.Common.FormatNumber(Model.SanPham.GiaBan, 0)</div>
+                    }
+                    <ul class="star_rating">
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                        <li><i class="fa-regular fa-star" aria-hidden="true"></i></li>
+                    </ul>
+                    <div class="product_color">
+                        <span>Kích thước:</span>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="col-md-10" style=" width: 235px;">
+                                            @Html.DropDownListFor(model => model.SelectedSizeid, new SelectList(Model.AvailableSizes, "MaS", "TenS"), "Chọn một Size", new { @class = "form-control", id = "ddlSize" })
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                        <span>Số lượng:</span>
+                        <div class="quantity_selector">
+                            <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <span id="quantity_value">1</span>
+                            <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+                        <div class="red_button" style="padding: 0 20px; margin-left: 20px;">
+                            <button style=" background: #fe4c50; border: 0px; color: white;" id="addToCartBtn">Add to Cart</button>
+                        </div>
+                        <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+                    </div>
+                    <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+                        <p>Lượt mua: <span style="color:red">@Model.SanPham.LuotMua</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tabs_section_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabs_container">
+                        <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+                            <li class="tab active" data-active-tab="tab_1"><span>Mô tả</span></li>
+                            <li class="tab" data-active-tab="tab_2"><span>Thông tin thêm</span></li>
+                            <li class="tab" data-active-tab="tab_3"><span>Đánh giá</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="tab_1" class="tab_container active">
+                        @if (Model.HinhAnh != null && Model.HinhAnh.Any())
+                        {
+                            <div class="row">
+                                @foreach (var item in Model.HinhAnh)
+                                {
+                                    <div class="col-lg-5 desc_col">
+                                        <div class="tab_title">
+                                            <h4>Mô tả</h4>
+                                        </div>
+                                        <div class="tab_text_block">
+                                            <h2>Chất lượng</h2>
+                                            <p>Cái áo này là một sản phẩm thời trang đa dụng và phổ biến trong tủ quần áo của nhiều người. Nó được thiết kế với sự chú trọng đến cảm giác thoải mái và phong cách.</p>
+                                        </div>
+                                        <div class="tab_image">
+                                            <img src="/@item.TenHinhAnh" alt="">
+                                        </div>
+                                        <div class="tab_text_block">
+                                            <h2>Kiểu dáng</h2>
+                                            <p>Áo có kiểu dáng đơn giản và tinh tế, phù hợp với nhiều dịp và phong cách khác nhau. Chất liệu vải của áo thường được lựa chọn cẩn thận, từ cotton mềm mại đến polyester bền và thoáng khí, để đảm bảo sự thoải mái khi mặc và dễ dàng bảo quản.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 offset-lg-2 desc_col">
+                                        <div class="tab_image">
+                                            <img src="/@item.TenHinhAnh" alt="">
+                                        </div>
+                                        <div class="tab_text_block">
+                                            <h2>Mô tả</h2>
+                                            <p>Cái áo là một sản phẩm thời trang linh hoạt và thường là một phần không thể thiếu trong tủ quần áo của mọi người. Với sự phù hợp và sáng tạo, nó có thể tạo nên phong cách riêng và thể hiện cá nhân của mỗi người.</p>
+                                        </div>
+                                        <div class="tab_image desc_last">
+                                            <img src="/@item.TenHinhAnh" alt="">
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                    <div id="tab_2" class="tab_container">
+                        <div class="row">
+                            <div class="col additional_info_col">
+                                <div class="tab_title additional_info_title">
+                                    <h4>Thông tin thêm</h4>
+                                </div>
+                                <p>COLOR:<span>Gold, Red, ...</span></p>
+                                @foreach (var item in Model.SanPhamSize.ToList())
+                                {
+                                    <p> Size: @item.Size.TenS</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Review sản phẩm*@
+                   
+                        <div id="tab_3" class="tab_container">
+                            <div class="row">
+                                <div class="col-lg-6 reviews_col">
+                                    <div class="tab_title reviews_title">
+                                        <h4>Đánh giá </h4>
+                                    </div>
+                                    @foreach (var cmt in Model.BinhLuan.ToList())
+                                    {
+                                        <div id="comments" class="user_review_container d-flex flex-column flex-sm-row" data-animate="fadeInUp">
+                                            <div class="user">
+                                                <div class="user_pic"></div>
+                                            </div>
+                                            <div class="review">
+                                                <div class="review_date">@cmt.NgayBL</div>
+                                                <div class="user_name">@cmt.KhachHang.HoTen</div>
+                                                <div class="review_date">@cmt.TieuDe</div>
+                                                <p>@cmt.NoiDung</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div id="comment-form" data-animate="fadeInUp">
+                                    <div class="tab_title reviews_title">
+                                        <h4>Để lại bình luận</h4>
+                                    </div>
+                                    @using (Html.BeginForm("Create", "BinhLuans", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ValidationSummary(true)
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="name">
+                                                        Tiêu đề<span class="required">*</span>
+                                                    </label>
+                                                    <input style="width:550px;" type="text" class="form-control" id="TieuDe" name="TieuDe">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="MaSP" value="@Model.SanPham.MaSP" />
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="comment">
+                                                        Bình luận <span class="required">*</span>
+                                                    </label>
+                                                    <textarea class="form-control" id="NoiDung" name="NoiDung" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        if (Session["Taikhoan"] == null || Session["Taikhoan"].ToString() == "")
+                                        {
+                                            <div class="row">
+                                                <div class="col-sm-12 text-right">
+                                                    <a href="#" style="background: #fe4c50" data-toggle="modal" data-target="#login-modal" class="btn btn-primary"><i class="fa fa-comment-o"></i>Gửi bình luận</a>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="col-sm-12 text-right">
+                                                    <button style="background: #fe4c50" type="submit" class="btn btn-primary"><i class="fa fa-comment-o"></i> Gửi bình luận</button>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+                                </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện nhấn nút "Add to Cart"
+        $("#addToCartBtn").click(function () {
+            // Lấy giá trị đã chọn từ DropDownList
+            var selectedSizeId = $("#ddlSize").val();
+
+
+            // Lấy các tham số URL hiện tại
+            var urlParams = new URLSearchParams(window.location.search);
+             var maSP = @Html.Raw(Json.Encode(Model.SanPham.MaSP));
+
+            // Tạo URL mới với tham số đã chọn
+            var newUrl = "@Url.Action("ThemGiohang", "GioHang")" + "?MaSP=" +maSP + "&MaS=" + selectedSizeId + "&strURL=" + window.location.href;
+
+            // Chuyển hướng đến URL mới
+            window.location.href = newUrl;
+        });
+    });
+</script>

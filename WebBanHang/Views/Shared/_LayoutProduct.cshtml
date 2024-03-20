@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>TopStyle</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="TopStyle Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Assets/Client/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/categories_responsive.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/categories_styles.css" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Assets/Client/styles/Hotline.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <div class="super_container">
+
+        <!-- Header -->
+        <!-- Top Nav -->
+        <header class="header trans_300">
+            <div class="top_nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="top_nav_left">Miễn phí vận chuyển cho tất cả các đơn hàng trong nội thành TP.HCM</div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="top_nav_right">
+                                <ul class="top_nav_menu">
+
+                                    <!-- / Language / My Account -->
+
+                                    <li class="language">
+                                        <a href="#">
+                                            Tiếng Việt
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="language_selection">
+                                            <li><a href="#">Tiếng Pháp</a></li>
+                                            <li><a href="#">Tiếng Anh</a></li>
+                                            <li><a href="#">Tiếng Đức</a></li>
+                                            <li><a href="#">Tiếng Nga</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="account">
+                                        <a href="#">
+                                            My Account
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="account_selection">
+                                            <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Navigation -->
+            <div class="main_nav_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="logo_container">
+                                <a href="/">TopStyle<span>Shop</span></a>
+                            </div>
+                            <nav class="navbar">
+                                <ul class="navbar_menu">
+                                    <li><a href="/">home</a></li>
+                                    <li><a href="@Url.Action("Partial_Product","ShopQuanAo")">shop</a></li>
+                                    <li><a href="#">blog</a></li>
+                                    <li><a href="@Url.Action("Index","Contact")">contact</a></li>
+                                </ul>
+                                <ul class="navbar_user">
+                                    <li class="checkout">
+                                        <a href="@Url.Action("Giohang","Giohang")">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <span id="checkout_items" class="checkout_items">@ViewBag.Tongsoluong</span>
+                                        </a>
+                                    </li>
+                                    @{
+                                        int check = 0;
+                                        var session = (WebBanHang.Models.KhachHang)Session["Taikhoan"];
+                                        if (session != null)
+                                        {
+                                            <li class="account" style="background:white;">
+                                                <a href="#" style="background:white;width:auto">
+                                                    @session.HoTen
+                                                </a>
+                                                <ul class="account_selection">
+                                                    <li style="padding-top: 20px; margin:0 10px"><a href="/NguoiDung/Profile"><i class="fa fa-sign-in" aria-hidden="true"></i>Profile</a></li>
+                                                    <li style="padding-top: 20px; margin-right:10px;"><a href="/NguoiDung/LogOut"><i class="fa fa-user-plus" aria-hidden="true"></i>LogOut</a></li>
+                                                </ul>
+                                            </li>
+                                            check = 1;
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/NguoiDung/DangNhap"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div>
+            <div class="container product_section_container">
+                <div class="row">
+                    <div class="col product_section clearfix">
+
+                        <!-- Breadcrumbs -->
+
+                        <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-bottom: 0px;">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Sản phẩm</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Best Sellers -->
+
+                        @Html.Action("Partial_ItemsSale", "ShopQuanAo")
+
+
+                        <div class="row" style="bottom:50px;">
+                            <div class="col text-center">
+                                <div class="section_title new_arrivals_title">
+                                    <h2>Sản phẩm</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar -->
+                        <div class="sidebar">
+                            <div class="sidebar_section" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                                <div class="sidebar_title">
+                                    <h5>Loại sản phẩm</h5>
+                                </div>
+                                @Html.Action("Partial_ProductCategory", "ShopQuanAo")
+                            </div>
+
+                            <div class="sidebar_section" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                                <div class="sidebar_title">
+                                    <h5>Bộ sưu tập</h5>
+                                </div>
+                                @Html.Action("Partial_ProductBST", "ShopQuanAo")
+                            </div>
+
+                            <!-- Price Range Filtering -->
+                            <div class="sidebar_section" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                                <div class="sidebar_title">
+                                    <h5>Filter by Price</h5>
+                                </div>
+                                <p>
+                                    <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+                                </p>
+                                <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 58%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 58%;"></span></div>
+                                <div class="filter_button"><span>filter</span></div>
+                            </div>
+
+                            <!-- Sizes -->
+                            <div class="sidebar_section" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+                                <div class="sidebar_title">
+                                    <h5>Kích thước</h5>
+                                </div>
+                                @Html.Action("Partial_ProductSize", "ShopQuanAo")
+                            </div>
+
+                            <!-- Color -->
+                            @*<div class="sidebar_section">
+                                    <div class="sidebar_title">
+                                        <h5>Color</h5>
+                                    </div>
+                                    <ul class="checkboxes">
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
+                                        <li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
+                                        <li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
+                                    </ul>
+                                    <div class="show_more">
+                                        <span><span>+</span>Show More</span>
+                                    </div>
+                                </div>*@
+                        </div>
+                        <!-- Main Content -->
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Benefit -->
+
+        <div class="benefit">
+            <div class="container">
+                <div class="row benefit_row">
+                    <div class="col-lg-3 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>free shipping</h6>
+                                <p>Miễn phí ship toàn quốc</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa-solid fa-money-bill" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>Thanh toán</h6>
+                                <p>Đảm bảo nhận hàng mới thanh toán cho khách hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>7 ngày trả hàng</h6>
+                                <p>Được trả lại hàng hoàn toàn miễn phí</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 benefit_col">
+                        <div class="benefit_item d-flex flex-row align-items-center">
+                            <div class="benefit_icon"><i class="fa-solid fa-door-open" aria-hidden="true"></i></div>
+                            <div class="benefit_content">
+                                <h6>Mở cửa cả tuần</h6>
+                                <p>8AM - 09PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+
+        <div class="newsletter">
+            <div class="container" style="background: #fdc6a0">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+                            <h4>Newsletter</h4>
+                            <p>Đăng ký nhận ngay giảm giá 20% cho lần mua hàng đầu tiên của bạn</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="post">
+                            <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                                <input id="newsletter_email" type="email" placeholder="Email của bạn" required="required" data-error="Valid email is required.">
+                                <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Gửi Email</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                            <ul class="footer_nav">
+                                <li><a href="contact.html">Hướng dẫn mua hàng</a></li>
+                                <li><a href="contact.html">Hướng dẫn thanh toán</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                            <ul>
+                                <li><a href="#"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-square-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-square-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-skype" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger intent="WELCOME"
+                  chat-title="TopStyles"
+                  agent-id="ce4e1b9b-b637-4828-9bf6-1d9ecd7182d6"
+                  language-code="vi"></df-messenger>
+    <script src="~/Assets/Client/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Assets/Client/styles/bootstrap4/popper.js"></script>
+    <script src="~/Assets/Client/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Assets/Client/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Assets/Client/plugins/easing/easing.js"></script>
+    <script src="~/Assets/Client/js/categories_custom.js"></script>
+    <script src="~/Assets/Client/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebBanHang.Models.ChiTietHoaDon>
+@{
+    ViewBag.Title = "ThongKeHoaDon";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Thống kê hóa đơn</h2>
+
+@using (Html.BeginForm("ThongKeHoaDon", "HoaDon", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Chọn tháng:")
+        @Html.DropDownList("thang", ViewBag.DanhSachThang as List<SelectListItem>, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Thống kê</button>
+}
+
+<hr />
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Mã hóa đơn</th>
+                <th>Ngày lập</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hoaDon in Model)
+            {
+                var s = @hoaDon.DonGia * @hoaDon.SoLuong;
+                string tongtien = $"{s:N}";
+                <tr>
+                    <td>@hoaDon.HoaDon.MaHD</td>
+                    @if (hoaDon.HoaDon.NgayLapHD != null)
+                    {
+                        <td>@hoaDon.HoaDon.NgayLapHD.Value.ToString("dd/MM/yyyy")</td>
+                    }
+                    else
+                    {
+                        <td>Ngày lập không có thông tin</td>
+                    }
+                    <td>@tongtien ₫</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có hóa đơn nào được tìm thấy.</p>
+}
+

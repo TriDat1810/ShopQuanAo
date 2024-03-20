@@ -1,0 +1,79 @@
+﻿@model WebBanHang.Models.KhachHang
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+<link href="~/Assets/Client/styles/Profile.css" rel="stylesheet" />
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row" style=" margin-top: 150px; display:flex">
+        @using (Html.BeginForm("Edit", "NguoiDung", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            var session = (WebBanHang.Models.KhachHang)Session["Taikhoan"];
+            if (session != null)
+            {
+                <div class="col-md-12 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="text-center">Thông tin người dùng</h2>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.MaKH)
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <label class="labels">Họ và tên </label>
+                                @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control input-full" }, @Required = "required" })
+                                @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels">Số điện thoại </label>
+                                @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control input-full" }, @Required = "required" })
+                                @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Địa chỉ </label>
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control input-full" }, @Required = "required" })
+                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Giới tính</label>
+                                <select class="form-control" name="GioiTinh">
+                                    <option value="0" @(session.GioiTinh == 0 ? "selected" : "")>Nam</option>
+                                    <option value="1" @(session.GioiTinh == 1 ? "selected" : "")>Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">Email </label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control input-full" }, @Required = "required" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div style="display:flex">
+                            <div style="display: flex;">
+                                <div style="margin-right:20px" class="mt-5 text-center"><button class="btn btn-secondary profile-button" type="submit"><a style="color:white" href="/NguoiDung/Profile"> < Quay trở lại</a></button></div>
+                                <div class="mt-5 text-center">
+                                    <a style="color:white" href="#">
+                                        <button class="btn btn-primary profile-button" type="submit" value="Cập nhật">Lưu thông tin</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: flex-end;">
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                    <a href="@Url.Action("ChangePassword", "NguoiDung", new {id = session.MaKH})">
+                                        <button class="btn btn-primary">Đổi mật khẩu</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

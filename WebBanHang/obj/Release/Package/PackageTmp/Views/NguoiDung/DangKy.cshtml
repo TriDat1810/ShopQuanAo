@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = null;
+}
+<link href="~/Assets/Client/styles/Login.css" rel="stylesheet" />
+<body style="display:flex; align-items:center; justify-content:center;">
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form" style="display:block" method="post">
+                <h2>Register</h2>
+                <table align="center">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+
+                        <tr style="height:40px">
+                            <td style="color:white">Tên đăng nhập:</td>
+                            <td>
+                                @Html.TextBox("TenDangNhap")
+                                @ViewData["tendangnhap"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white">  Mật khẩu:</td>
+                            <td>
+                                @Html.Password("Matkhau")
+                                @ViewData["matkhau"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white">Nhập lại mật khẩu: </td>
+                            <td>
+                                @Html.Password("NhapLaiMatKhau")
+                                @ViewData["nhalaimatkhau"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white"> Họ tên khách hàng:</td>
+                            <td>
+                                @Html.TextBox("HoTen")
+                                @ViewData["hoten"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white"> Địa chỉ:</td>
+                            <td>
+                                @Html.TextBox("Diachi")
+                                @ViewData["diachi"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white"> Email:</td>
+                            <td>
+                                @Html.TextBox("Email")
+                                @ViewData["email"]
+                            </td>
+                        </tr>
+                        <tr style="height:40px">
+                            <td style="color:white">Điện thoại:</td>
+                            <td>
+                                @Html.TextBox("SoDienThoai")
+                                @ViewData["sodienthoai"]
+                            </td>
+                            <p style="color:red;padding-left: 180px;">@ViewBag.ThongBao</p>
+                        </tr>
+                        <tr style="height:40px">
+                            <td></td>
+                            <td>
+                                <button type="Submit" class="btn btn-primary">Đăng ký</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <p class="message">Already registered? <a href="@Url.Action("DangNhap","NguoiDung")">Sign In</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebBanHang.Models.Size>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li>
+        <i class="icon-home"></i>
+        <a href="/Admin/Index">Trang chủ</a>
+        <i class="icon-angle-right"></i>
+    </li>
+    <li>
+        Sản phẩm
+        <i class="icon-angle-right"></i>
+    </li>
+    <li><a href="#">Kích thước</a></li>
+</ul>
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2>Kích thước</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+        </div>
+
+        <div class="box-content">
+
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+                <thead>
+                    <tr>
+                        <th>
+                            Mã kích thước       
+                        </th>
+                        <th>
+                            Tên kích thước
+                        </th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaS">
+                            <td>
+                                @item.MaS
+                            </td>
+                            <td>
+                                @item.TenS
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="/Admin/KichThuoc/Edit/@item.MaS"><i class="halflings-icon white edit"></i> Sửa</a>
+                                <a class="btn btn-danger" data-ajax="true" data-ajax-complete="$('#row_@item.MaS').remove()" data-ajax-confirm="Bạn có muốn xóa bản ghi này không?" data-ajax-method="Delete" href="/Admin/KichThuoc/Delete/@item.MaS">
+                                    <i class="halflings-icon white trash"></i> Xóa
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p>Lưu ý: Phải xóa toàn bộ sản phẩm hay danh mục có liên quan trong Size mới có thể tiến hành xóa.</p>
+            <a class="btn btn-success" href="@Url.Action("Create","KichThuoc")">
+                <i class="halflings-icon white zoom-in"></i>Thêm mới
+            </a>
+        </div>
+    </div><!--/span-->
+</div><!--/row-->

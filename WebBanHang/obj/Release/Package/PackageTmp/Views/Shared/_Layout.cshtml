@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>TopStyle</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="TopStyle Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/bootstrap4/bootstrap.min.css">
+    <link href="~/Assets/Client/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Assets/Client/styles/responsive.css">
+    <link href="~/Assets/Client/styles/Hotline.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Assets/Client/styles/main_styles.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="super_container">
+
+        <!-- Header -->
+        <!-- Top Nav -->
+        <header class="header trans_300">
+            <div class="top_nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <div class="top_nav_right">
+                                <ul class="top_nav_menu">
+
+                                    <!-- / Language / My Account -->
+
+                                    <li class="language">
+                                        <a href="#">
+                                            Tiếng Việt
+                                            <i class="fa fa-angle-down"></i>
+                                        </a>
+                                        <ul class="language_selection">
+                                            <li><a href="#">Tiếng Pháp</a></li>
+                                            <li><a href="#">Tiếng Anh</a></li>
+                                            <li><a href="#">Tiếng Đức</a></li>
+                                            <li><a href="#">Tiếng Nga</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="top_nav_left">Miễn phí vận chuyển cho tất cả các đơn hàng trong nội thành TP.HCM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Main Navigation -->
+            <div class="main_nav_container">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            <div class="logo_container">
+                                <a href="/">TopStyle<span>shop</span></a>
+                            </div>
+                            <nav class="navbar">
+                                <ul class="navbar_menu">
+                                    <li><a href="/">home</a></li>
+                                    <li><a href="@Url.Action("Partial_Product","ShopQuanAo")">shop</a></li>
+                                    <li><a href="#">blog</a></li>
+                                    <li><a href="@Url.Action("Index","Contact")">contact</a></li>
+                                </ul>
+                                <ul class="navbar_user" style="margin-right:30px; display:flex">
+                                    @Html.Action("GiohangPartial", "GioHang")
+                                    @{
+                                        int check = 0;
+                                        var session = (WebBanHang.Models.KhachHang)Session["Taikhoan"];
+                                        if (session != null)
+                                        {
+                                            <li class="account" style="background:white;">
+                                                <a href="#" style="background:white;width:auto">
+                                                    Xin chào, @session.HoTen
+                                                </a>
+                                                <ul class="account_selection">
+                                                    <li style="padding-top: 20px; margin:0 10px"><a href="/NguoiDung/Profile"><i class="fa fa-sign-in" aria-hidden="true"></i>Profile</a></li>
+                                                    <li style="padding-top: 20px; margin-right:10px;"><a href="/NguoiDung/LogOut"><i class="fa fa-user-plus" aria-hidden="true"></i>LogOut</a></li>
+                                                </ul>
+                                            </li>
+                                            check = 1;
+                                        }
+                                        else
+                                        {
+                                            <li style="margin-left:50px;display:flex">
+                                                <a href="/NguoiDung/DangNhap">
+                                                    <div style="padding: 10px 10px; display: flex; align-items: center; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
+                                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                                        <div style="width:100px; margin-left:0px;">Đăng nhập</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li style="margin-left:100px;display:flex">
+                                                <a href="/NguoiDung/DangKy">
+                                                    <div style="padding: 10px 10px; display: flex; align-items: center; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; ">
+                                                        <i class="fa-solid fa-address-card" aria-hidden="true"></i>
+                                                        <div style="width:100px; margin-left:0px;">Đăng Ký</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+    
+    <!-- Chatra {literal} -->
+    <script>
+        (function (d, w, c) {
+            w.ChatraID = 'jFxDeGCWsYDTF2RgQ';
+            var s = d.createElement('script');
+            w[c] = w[c] || function () {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
+    </script>
+    <!-- /Chatra {/literal} -->
+    <script src="~/Assets/Client/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Assets/Client/styles/bootstrap4/popper.js"></script>
+    <script src="~/Assets/Client/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="~/Assets/Client/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Assets/Client/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="~/Assets/Client/plugins/easing/easing.js"></script>
+    <script src="~/Assets/Client/js/custom.js"></script>
+    <script src="~/Assets/Client/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/Assets/Client/js/single_custom.js"></script>
+</body>
+</html>

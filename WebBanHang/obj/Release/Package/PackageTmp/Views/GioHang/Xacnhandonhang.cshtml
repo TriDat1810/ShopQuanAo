@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Xacnhandonhang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="new_arrivals">
+    <div class="container">
+        <div style="margin-top:200px">
+            <button class="btn btn-success"><a style="color:white" href="@Url.Action("Index", "ShopQuanAo")">Quay trở lại trang chủ</a></button>
+        </div>
+        <div class="row" style="margin-bottom:40px">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>Xác nhận đơn hàng thanh công</h2>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="free_delivery d-flex flex-row align-items-center justify-content-center" style="width: 200px; left: 450px; border-radius: 15px;">
+                <i class="fa-solid fa-truck"></i><span style="margin-left:10px;">free delivery</span>
+            </div>
+            <div style="margin-top:20px;">
+                <h4>Đơn hàng của quý khách đã được chúng tôi ghi nhận. Chúng tôi sẽ liên hệ quý khách trong thời gian sớm nhất và giao hàng đúng hẹn</h4>
+                <h4>Chúc bạn có một ngày mới thật vui vẻ. Trân trọng!</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+
+<div class="newsletter">
+    <div class="container" style="background: #fdc6a0">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
+                    <h4>Newsletter</h4>
+                    <p>Đăng ký nhận ngay giảm giá 20% cho lần mua hàng đầu tiên của bạn</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form action="post">
+                    <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
+                        <input id="newsletter_email" type="email" placeholder="Email của bạn" required="required" data-error="Valid email is required.">
+                        <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Gửi Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                    <ul class="footer_nav">
+                        <li><a href="contact.html">Hướng dẫn mua hàng</a></li>
+                        <li><a href="contact.html">Hướng dẫn thanh toán</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-facebook-messenger" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-skype" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-pinterest" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

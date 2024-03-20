@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebBanHang.Models.Size>
+@if (Model != null && Model.Any())
+{
+    <ul class="sidebar_categories">
+        @foreach (var item in Model)
+        {
+            if (ViewBag.CateId == item.MaS)
+            {
+                <li class="active"><a href="@Url.Action("SanPhamTheoSizes", "ShopQuanAo", new { id = item.MaS})"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>@item.TenS</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("SanPhamTheoSizes", "ShopQuanAo", new { id = item.MaS})">@item.TenS</a></li>
+            }
+
+        }
+    </ul>
+}
+

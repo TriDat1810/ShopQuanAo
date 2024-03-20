@@ -1,0 +1,46 @@
+﻿@model  WebBanHang.Models.BinhLuan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row-fluid sortable">
+    <div class="box span12">
+        <div class="box-header" data-original-title>
+            <h2><i class="halflings-icon white edit"></i><span class="break"></span>Sửa trạng thái bình luận</h2>
+            <div class="box-icon">
+                <a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+                <a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+            </div>
+        </div>
+        <div class="box-content">
+            @using (Html.BeginForm("Edit", "BinhLuan", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.MaBL)
+                <div class="form-horizontal">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="selectError3">Trạng thái</label>
+                            <div class="controls">  
+                                @Html.DropDownListFor(model => model.TrangThai, new List<SelectListItem>
+                                    {
+                                      new SelectListItem() { Text = "Chưa đặt", Value = ""},
+                                      new SelectListItem() { Text = "Hiển thị", Value = "true"},
+                                      new SelectListItem() { Text = "Ẩn", Value = "false"}
+                                     })
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <a style="background-color:#702222; text-decoration: none; color: #fff" class="btn" href="@Url.Action("Index", "BinhLuan")">Back to list</a>
+                            <button type="submit" class="btn btn-primary" name="btnSubmit">Submit</button>
+                            <button type="reset" class="btn">Reset</button>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+        </div>
+    </div>
+</div>

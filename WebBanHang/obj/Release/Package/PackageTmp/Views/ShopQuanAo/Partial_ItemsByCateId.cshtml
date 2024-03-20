@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebBanHang.Models.SanPham>
+<div class="new_arrivals">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="section_title new_arrivals_title">
+                    <h2>New Arrivals</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col text-center">
+                <div class="new_arrivals_sorting">
+                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">Women</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">Accessories</li>
+                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">Men</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="product-grid" data-isotope="{ &quot;itemSelector&quot;: &quot;.product-item&quot;, &quot;layoutMode&quot;: &quot;fitRows&quot; }" style="position: relative; height: 760px;">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var sanpham in Model)
+                        {
+                            <!-- Product -->
+                            <div class="product-item @sanpham.LoaiSanPham.TenLoai" style="position: absolute; left: 0px; top: 0px;">
+                                <a href="@Url.Action("Details","ShopQuanAo",new {id=@sanpham.MaSP})">
+                                    <div class="product discount product_filter" style="border-right: 1px solid rgb(233, 233, 233);">
+                                        <div class="product_image">
+                                            <img style="width: 218px; height: 218px; margin-top: 20px;" src="/@sanpham.AnhBia" alt="@sanpham.TenSP">
+                                        </div>
+                                        <div class="favorite favorite_left"></div>
+                                        @if (sanpham.GiaKhuyenMai > 0)
+                                        {
+                                            <div class="product_bubble product_bubble_right product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+                                        }
+                                        <div class="product_info">
+                                            <h6 class="product_name"><a href="@Url.Action("","")">@sanpham.TenSP</a></h6>
+                                            @if (sanpham.GiaKhuyenMai > 0)
+                                            {
+                                                <div class="product_price">@WebBanHang.Common.Common.FormatNumber(sanpham.GiaKhuyenMai, 0)<span>@WebBanHang.Common.Common.FormatNumber(sanpham.GiaBan, 0)</span></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="product_price">@WebBanHang.Common.Common.FormatNumber(sanpham.GiaBan, 0)</div>
+                                            }
+                                        </div>
+                                        <h6 class="product_name" style="height:40px;">Lượt xem: @sanpham.LuotXem</h6>
+                                    </div>
+                                </a>
+                                <div style="margin-left:0px" class="red_button add_to_cart_button"><a href="@Url.Action("Details","ShopQuanAo",new {id=@sanpham.MaSP})">add to cart</a></div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

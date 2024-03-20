@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Assets/Client/styles/Login.css" rel="stylesheet" />
+<body style="display:flex; align-items:center; justify-content:center;">
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" method="post">
+                <h2>Login </h2>
+                @using (Html.BeginForm("DangNhap", "NguoiDung", FormMethod.Post))
+                {
+                    <input type="text" name="TenDangNhap" placeholder="Tên đăng nhập" />
+                    @ViewData["tendangnhap"]
+                    <input type="password" name="MatKhau" placeholder="Mật khẩu" />
+                    @ViewData["matkhau"]
+                    <button class="btn" type="submit">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Sign in
+                    </button>
+                }
+                <p class="message">Not registered? <a href="@Url.Action("DangKy","NguoiDung")"> Create an account</a></p>
+            </form>
+        </div>
+    </div>
+</body >
